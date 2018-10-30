@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>net.engining.pcx.ci</groupId>
 		<artifactId>ci-parent</artifactId>
-		<version>3.0.0.RELEASE</version>
+		<version>3.1.0-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>ci-process-service</artifactId>
@@ -14,11 +14,7 @@
 		</dependency>
 		<dependency>
 			<groupId>net.engining.pg</groupId>
-			<artifactId>pg-parameter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.engining.pg</groupId>
-			<artifactId>pg-gwt</artifactId>
+			<artifactId>pg-parameter-help</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.engining.pcx.ci</groupId>
