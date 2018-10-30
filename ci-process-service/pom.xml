@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.engining.pcx.ci</groupId>
+		<artifactId>ci-parent</artifactId>
+		<version>3.0.0.RELEASE</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>ci-process-service</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>net.engining.pg</groupId>
+			<artifactId>pg-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.engining.pg</groupId>
+			<artifactId>pg-parameter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.engining.pg</groupId>
+			<artifactId>pg-gwt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.engining.pcx.ci</groupId>
+			<artifactId>ci-process-service-interface</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- 切面weave支持；这里默认对spring事务管理通过weave的方式切入，因此涉及到JPA事务管理必须加入；另其他切面支持，需要增加相应配置 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

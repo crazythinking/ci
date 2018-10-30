@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>net.engining.project</groupId>
+		<artifactId>project-parent</artifactId>
+		<version>3.1.RELEASE</version>
+	</parent>
+	
+	<groupId>net.engining.pcx.ci</groupId>
+	<artifactId>ci-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>3.0.0.RELEASE</version>
+	
+	<properties>
+		<ci.version>3.0.0.RELEASE</ci.version>
+		<pg.version>3.0.0.RELEASE</pg.version>
+	</properties>
+	
+	<!-- <scm>
+		<connection>scm:svn://101.132.40.129/smartstar/trunk/ci</connection>
+		<developerConnection>scm:svn://101.132.40.129/smartstar/trunk/ci</developerConnection>
+	</scm> -->
+	
+	<modules>
+		<module>ci-param-model</module>
+		<module>ci-entity-model</module>
+		<module>ci-process-service-interface</module>
+		<module>ci-process-service</module>
+	</modules>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.engining.pg</groupId>
+				<artifactId>pg-support</artifactId>
+				<version>${pg.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.pg</groupId>
+				<artifactId>pg-parameter</artifactId>
+				<version>${pg.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.pg</groupId>
+				<artifactId>pg-gwt</artifactId>
+				<version>${pg.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>net.engining.pcx.ci</groupId>
+				<artifactId>ci-entity-model</artifactId>
+				<version>${ci.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.pcx.ci</groupId>
+				<artifactId>ci-param-model</artifactId>
+				<version>${ci.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.pcx.ci</groupId>
+				<artifactId>ci-process-service-interface</artifactId>
+				<version>${ci.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.pcx.ci</groupId>
+				<artifactId>ci-process-service</artifactId>
+				<version>${ci.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>net.engining.pg</groupId>
+					<artifactId>pg-maven-plugin</artifactId>
+					<version>${pg.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+</project>

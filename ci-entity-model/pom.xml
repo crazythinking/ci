@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.engining.pcx.ci</groupId>
+		<artifactId>ci-parent</artifactId>
+		<version>3.0.0.RELEASE</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>ci-entity-model</artifactId>
+	<name>ci-entity-model - 实体类组件</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>net.engining.pcx.ci</groupId>
+			<artifactId>ci-param-model</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<!-- entity类生成插件 -->
+			<plugin>
+				<groupId>net.engining.pg</groupId>
+				<artifactId>pg-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>net.engining.pcx.ci</groupId>
+						<artifactId>ci-param-model</artifactId>
+						<version>${ci.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>entity</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<designs>
+						<design>ci.erm</design>
+					</designs>
+					<targetModule>net.engining.pcx.ci.entity.Entity</targetModule>
+					<outputDirectory>${project.build.directory}/pg-entities</outputDirectory>
+				</configuration>
+			</plugin>
+			<!-- Q对象生成插件 -->
+			<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceDirectory>${project.build.directory}/pg-entities</sourceDirectory>
+							<outputDirectory>${project.build.directory}/querydsl-sources</outputDirectory>
+							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>com.querydsl</groupId>
+						<artifactId>querydsl-apt</artifactId>
+						<version>${querydsl.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/pg-entities</source>
+								<source>${project.build.directory}/querydsl-sources</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
